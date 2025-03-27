@@ -22,26 +22,26 @@ extern "C" {
 /*
 NRF52 PRO MICRO PIN ASSIGNMENT
 
-| Pin   | Function    |     | Pin      | Function     | RF95  |
+| Pin  | Function   |    | Pin    | Function   | RF95  |
 | ----- | ----------- | --- | -------- | ------------ | ----- |
-| Gnd   |             |     | vbat     |              |       |
-| P0.06 | Serial2 RX  |     | vbat     |              |       |
-| P0.08 | Serial2 TX  |     | Gnd      |              |       |
-| Gnd   |             |     | reset    |              |       |
-| Gnd   |             |     | ext_vcc  | *see 0.13    |       |
-| P0.17 | RXEN        |     | P0.31    | BATTERY_PIN  |       |
-| P0.20 | GPS_RX      |     | P0.29    | BUSY         | DIO0  |
-| P0.22 | GPS_TX      |     | P0.02    | MISO         | MISO  |
-| P0.24 | GPS_EN      |     | P1.15    | MOSI         | MOSI  |
-| P1.00 | BUTTON_PIN  |     | P1.13    | CS           | CS    |
-| P0.11 | SCL         |     | P1.11    | SCK          | SCK   |
-| P1.04 | SDA         |     | P0.10    | DIO1/IRQ     | DIO1  |
-| P1.06 | Free pin    |     | P0.09    | RESET        | RST   |
-|       |             |     |          |              |       |
-|       | Mid board   |     |          | Internal     |       |
-| P1.01 | Free pin    |     | 0.15     | LED          |       |
-| P1.02 | Free pin    |     | 0.13     | 3V3_EN       |       |
-| P1.07 | Free pin    |     |          |              |       |
+| Gnd  |       |    | vbat   |        |       |
+| P0.06 | Serial2 RX  |    | vbat   |        |       |
+| P0.08 | Serial2 TX  |    | Gnd    |        |       |
+| Gnd  |       |    | reset   |        |       |
+| Gnd  |       |    | ext_vcc  | *see 0.13   |       |
+| P0.17 | RXEN     |    | P0.31   | BATTERY_PIN  |       |
+| P0.20 | GPS_RX    |    | P0.29   | BUSY     | DIO0  |
+| P0.22 | GPS_TX    |    | P0.02   | MISO         | MISO  |
+| P0.24 | GPS_EN    |    | P1.15   | MOSI     | MOSI  |
+| P1.00 | BUTTON_PIN  |    | P1.13   | CS      | CS   |
+| P0.11 | SCL     |    | P1.11   | SCK      | SCK   |
+| P1.04 | SDA     |    | P0.10   | DIO1/IRQ   | DIO1  |
+| P1.06 | Free pin   |    | P0.09   | RESET     | RST   |
+|    |       |    |      |        |       |
+|    | Mid board  |    |      | Internal   |       |
+| P1.01 | Free pin   |    | 0.15   | LED      |       |
+| P1.02 | Free pin   |    | 0.13   | 3V3_EN    |       |
+| P1.07 | Free pin   |    |      |        |       |
 */
 
 // Number of pins defined in PinDescription array
@@ -51,7 +51,7 @@ NRF52 PRO MICRO PIN ASSIGNMENT
 #define NUM_ANALOG_OUTPUTS (0)
 
 // Pin 13 enables 3.3V periphery. If the Lora module is on this pin, then it should stay enabled at all times.
-#define PIN_3V3_EN (0 + 13) // P0.13
+//#define PIN_3V3_EN (0 + 13) // P0.13
 
 // Analog pins
 #define BATTERY_PIN (0 + 31) // P0.31 Battery ADC
@@ -76,8 +76,8 @@ NRF52 PRO MICRO PIN ASSIGNMENT
 // WIRE IC AND IIC PINS
 #define WIRE_INTERFACES_COUNT 1
 
-#define PIN_WIRE_SDA (32 + 4) // P1.04
-#define PIN_WIRE_SCL (0 + 11) // P0.11
+#define PIN_WIRE_SDA (0 + 7) // P0.07
+#define PIN_WIRE_SCL (0 + 5) // P0.05
 
 // LED
 #define PIN_LED1 (0 + 15) // P0.15
@@ -90,10 +90,15 @@ NRF52 PRO MICRO PIN ASSIGNMENT
 #define BUTTON_PIN (32 + 0) // P1.00
 
 // GPS
-#define PIN_GPS_TX (0 + 22) // P0.22
-#define PIN_GPS_RX (0 + 20) // P0.20
+#define PIN_GPS_TX (32 + 11) // P1.11
+#define PIN_GPS_RX (32 + 10) // P1.10
 
-#define PIN_GPS_EN (0 + 24) // P0.24
+#define PIN_GPS_EN (0 + 2) // P0.02
+#define PIN_GSP_RST (32 + 13) // P1.13
+
+#define GPS_BAUDRATE_FIXED 1
+#define GPS_BAUDRATE 9600
+
 #define GPS_POWER_TOGGLE
 #define GPS_UBLOX
 // define GPS_DEBUG
@@ -108,14 +113,14 @@ NRF52 PRO MICRO PIN ASSIGNMENT
 // Serial interfaces
 #define SPI_INTERFACES_COUNT 1
 
-#define PIN_SPI_MISO (0 + 2)   // P0.02
-#define PIN_SPI_MOSI (32 + 15) // P1.15
-#define PIN_SPI_SCK (32 + 11)  // P1.11
+#define PIN_SPI_MISO (32 + 2)   // P1.02
+#define PIN_SPI_MOSI (32 + 4) // P1.04
+#define PIN_SPI_SCK (32 + 6)  // P1.06
 
 #define LORA_MISO PIN_SPI_MISO
 #define LORA_MOSI PIN_SPI_MOSI
 #define LORA_SCK PIN_SPI_SCK
-#define LORA_CS (32 + 13) // P1.13
+#define LORA_CS (0 + 24) // P0.24
 
 // LORA MODULES
 #define USE_LLCC68
@@ -126,22 +131,22 @@ NRF52 PRO MICRO PIN ASSIGNMENT
 
 // RF95 CONFIG
 
-#define LORA_DIO0 (0 + 29) // P0.29 BUSY
+#define LORA_DIO0 (0 + 13) // P0.13 BUSY
 #define LORA_DIO1 (0 + 10) // P0.10 IRQ
-#define LORA_RESET (0 + 9) // P0.09 NRST
+#define LORA_RESET (32 + 0) // P1.00 NRST
 
 // RX/TX for RFM95/SX127x
-#define RF95_RXEN (0 + 17)    // P0.17
+#define RF95_RXEN (0 + 10)    // P0.10
 #define RF95_TXEN RADIOLIB_NC // Assuming that DIO2 is connected to TXEN pin. If not, TXEN must be connected.
 
 // SX126X CONFIG
-#define SX126X_CS (32 + 13)      // P1.13 FIXME - we really should define LORA_CS instead
-#define SX126X_DIO1 (0 + 10)     // P0.10 IRQ
+#define SX126X_CS (0 + 24)      // P0.24 FIXME - we really should define LORA_CS instead
+#define SX126X_DIO1 (0 + 22)     // P0.22 IRQ
 #define SX126X_DIO2_AS_RF_SWITCH // Note for E22 modules: DIO2 is not attached internally to TXEN for automatic TX/RX switching,
                                  // so it needs connecting externally if it is used in this way
-#define SX126X_BUSY (0 + 29)     // P0.29
-#define SX126X_RESET (0 + 9)     // P0.09
-#define SX126X_RXEN (0 + 17)     // P0.17
+#define SX126X_BUSY (0 + 13)     // P0.13
+#define SX126X_RESET (32 + 0)     // P1.00
+#define SX126X_RXEN (0 + 10)     // P0.10
 #define SX126X_TXEN RADIOLIB_NC  // Assuming that DIO2 is connected to TXEN pin. If not, TXEN must be connected.
 
 // LR1121
